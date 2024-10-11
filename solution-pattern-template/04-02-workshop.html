@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Solution Pattern: Name Template :: Solution Patterns for Cloud Native Architectures</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/04-02-workshop.html">
+    <link rel="prev" href="04-01-setup.html#_environment_setup">
+    <link rel="next" href="05-prod-setup.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" style="font-size: 20px; color: white"
+        href="https://redhat-solution-patterns.github.io/solution-patterns">
+        <img src="../_/img/logo.png" height="35px" alt="Solution Patterns">&nbsp; Solution Patterns for Cloud Native Architectures</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Architectures &amp; Patterns</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/architect/portfolio/" target="_blank">Portfolio Architecture&nbsp; </a>
+            <a class="navbar-item" href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html"  target="_blank">Solution Patterns </a>
+            <a class="navbar-item" href="https://validatedpatterns.io/" target="_blank">Validated Patterns&nbsp;</a>
+            <a class="navbar-item" href="https://catalog.redhat.com/solutions" target="_blank">Ecosystem Solutions&nbsp;</a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Resources</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com">Red Hat Developers</a>
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com/app-dev-platform">App Dev Platform</a>
+            <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/application-foundations">Red Hat Application Services</a>
+          </div>
+        </div>
+
+          <a class="navbar-item" target="_blank" href="https://github.com/redhat-solution-patterns/redhat-solution-patterns.github.io/issues">Feedback</a>
+          <a class="navbar-item" target="_blank" href="https://redhat-solution-patterns.github.io/solution-patterns/contributors-guide.html">Contribute</a>
+
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="solution-pattern-template" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">Openshift Serverless for AI/ML</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">1. Home page</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#why-serverless">1.1 Why Serverless for AI/ML</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#use-cases">1.2 Use cases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_story_behind_this_solution_pattern">1.3 The story behind this solution pattern</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_solution">1.4 The solution</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html">2. OpenShift Serverless Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_components">2.1. Serverless components</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_serving">2.2. Knative Serving</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_eventing">2.3. Knative Eventing</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-solutions.html">3. See the Solutions in Action</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-workshop.html">3.1 Serverless Bookstore Lab</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-workshop.html#_what_are_we_building">3.1.1. About the workshop</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-01-setup.html#_environment_setup">3.1.2. Environment Setup</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#_send_review_comment_to_broker">3.2.3. Send comments to broker</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="05-prod-setup.html">4. Configuring OpenShift Serverless for Production</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="developer-resources.html">5. Developer Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#_resources">5.1 Resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#interactive-demos">5.2 Interactive Demos</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#demos">5.3 Demo Recordings</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html" target="_blank" rel="noopener">Explore Red Hat Solution Patterns</a></span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Openshift Serverless for AI/ML</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Openshift Serverless for AI/ML</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Openshift Serverless for AI/ML</a></li>
+    <li><a href="03-solutions.html">3. See the Solutions in Action</a></li>
+    <li><a href="04-workshop.html">3.1 Serverless Bookstore Lab</a></li>
+    <li><a href="#_send_review_comment_to_broker">3.2.3. Send comments to broker</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/ortwinschneider/solution-pattern-serverless-ai/edit/main/documentation/modules/ROOT/pages/04-02-workshop.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Solution Pattern: Name Template</h1>
+<h1 id="_send_review_comment_to_broker" class="sect0"><a class="anchor" href="#_send_review_comment_to_broker"></a><a class="link" href="#_send_review_comment_to_broker">Send Review Comment to Broker</a></h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image25.png" alt="image25" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>The main dashboard of our bookstore features a comment section where readers can view comments from others and submit their own through a text input area. While the process appears straightforward - click a button, and the comment is posted - the underlying mechanism is powered by a robust event-driven architecture.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_knative_features_will_we_learn_about"><a class="anchor" href="#_what_knative_features_will_we_learn_about"></a><a class="link" href="#_what_knative_features_will_we_learn_about">1. <strong>What Knative features will we learn about?</strong></a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Knative Eventing Broker</p>
+</li>
+<li>
+<p>Knative Eventing Sink</p>
+</li>
+<li>
+<p>Knative SinkBinding</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_does_the_deliverable_look_like"><a class="anchor" href="#_what_does_the_deliverable_look_like"></a><a class="link" href="#_what_does_the_deliverable_look_like">2. <strong>What does the deliverable look like?</strong></a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image3.png" alt="image3" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>In simple words: after the user clicks on the submit button in the frontend, the comment will show up in the event-display service.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_implementation"><a class="anchor" href="#_implementation"></a><a class="link" href="#_implementation">3. <strong>Implementation</strong></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_step_0_know_the_basics"><a class="anchor" href="#_step_0_know_the_basics"></a><a class="link" href="#_step_0_know_the_basics">3.1. <strong>Step 0: Know the basics</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image6.png" alt="image6" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>In the world of microservices and REST APIs, we often refer to requests as the primary method of communication between services. However, in an event-driven architecture, the smallest unit is an event. Knative Eventing adheres to the CloudEvents specification, making it essential to understand this concept before moving forward. Learn more about CloudEvents [here](<a href="https://cloudevents.io/){:target="_blank"}" class="bare">https://cloudevents.io/){:target="_blank"}</a> before proceeding!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_1_understand_book_review_service"><a class="anchor" href="#_step_1_understand_book_review_service"></a><a class="link" href="#_step_1_understand_book_review_service">3.2. <strong>Step 1: Understand Book Review Service</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image11.png" alt="image11" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>The book review service is our Node.js API server, playing a crucial role in our event-driven architecture. It&#8217;s essential to understand how it operates, as it receives events and processes them appropriately.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image2.png" alt="image2" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Key Concepts: Broker and SinkBinding</strong></p>
+</div>
+<div class="paragraph">
+<p>Before we dive into the code, let&#8217;s clarify two important concepts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Broker</strong>: Acts as the central point in the event-driven architecture, routing events to the correct destinations.</p>
+</li>
+<li>
+<p><strong>SinkBinding</strong>: This Knative Eventing component automatically injects the Broker&#8217;s address into the environment variable <code>K_SINK</code>, ensuring that the Node.js server always has the correct address without manual updates.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You will get a deeper understanding along the way.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image12.png" alt="image12" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s examine the <code>node-server/index.js</code> file, starting with the <code>/add</code> function. When a user submits a comment through the frontend, it is first received by this endpoint.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">app.post('/add', async (req, res) =&gt; {
+  try {
+    const receivedEvent = HTTP.toEvent({headers: req.headers, body: req.body});
+    const brokerURI = process.env.K_SINK;
+
+    if (receivedEvent.type === 'new-review-comment') {
+      const response = await fetch(brokerURI, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/cloudevents+json',
+          'ce-specversion': receivedEvent.specversion,
+          'ce-type': receivedEvent.type,
+          'ce-source': receivedEvent.source,
+          'ce-id': receivedEvent.id,
+        },
+        body: JSON.stringify(receivedEvent.data),
+      });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Receiving Events</strong>: The <code>/add</code> endpoint receives events from the frontend. It uses CloudEvents' SDK to convert the incoming request into a CloudEvent object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const receivedEvent = HTTP.toEvent({headers: req.headers, body: req.body});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Determining Broker Address</strong>: The Broker&#8217;s address is dynamically assigned in the cluster. The Node.js server retrieves this address from the environment variable <code>K_SINK</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const brokerURI = process.env.K_SINK;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may wonder who told the environment variable about the address? That’s Knative SinkBinding.</p>
+</div>
+<div class="paragraph">
+<p><strong>Event Filtering</strong>: The service checks the event type. If it&#8217;s a <code>new-review-comment</code>, it forwards the event to the Broker:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">if (receivedEvent.type === 'new-review-comment') {
+  // logic that forwards the event, see below
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Forwarding Events Logic</strong>: The event is forwarded to the Broker with the appropriate CloudEvent headers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const response = await fetch(brokerURI, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/cloudevents+json',
+    'ce-specversion': receivedEvent.specversion,
+    'ce-type': receivedEvent.type,
+    'ce-source': receivedEvent.source,
+    'ce-id': receivedEvent.id,
+  },
+  body: JSON.stringify(receivedEvent.data),
+});</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image21.png" alt="image21" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Exploring Other Functions</strong></p>
+</div>
+<div class="paragraph">
+<p>The Node.js server contains other functions that follow a similar pattern, with detailed comments explaining their functionality:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/insert</code>: Receives CloudEvents and inserts the payload into the PostgreSQL database.</p>
+</li>
+<li>
+<p><code>/comment</code>: Creates a WebSocket connection with the frontend to transport comments from the database.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_create_broker"><a class="anchor" href="#_step_2_create_broker"></a><a class="link" href="#_step_2_create_broker">3.3. <strong>Step 2: Create Broker</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image17.png" alt="image17" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>The Broker acts as a router in your event-driven application, receiving events and routing them to the correct destination.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1: Create a new YAML file named <code>node-server/config/200-broker.yaml</code> and add the following content:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+    name: bookstore-broker</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2: Apply the YAML file:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f node-server/config/200-broker.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">broker.eventing.knative.dev/bookstore-broker created</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, use the [Knative CLI <code>kn</code>](<a href="https://knative.dev/docs/client/#kn){:target="_blank"}" class="bare">https://knative.dev/docs/client/#kn){:target="_blank"}</a> to create the Broker:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kn broker create bookstore-broker</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Broker 'bookstore-broker' successfully created in namespace 'default'.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Running the following command to list the Brokers:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get brokers</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the Broker <code>bookstore-broker</code> with <code>READY</code> status as <code>True</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">NAME               URL                                                                                 AGE     READY   REASON
+bookstore-broker   http://broker-ingress.knative-eventing.svc.cluster.local/default/bookstore-broker   7m30s   True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If there are issues, use the following command to diagnose:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe broker bookstore-broker</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3_create_a_sinkbinding_between_the_node_js_server_and_broker"><a class="anchor" href="#_step_3_create_a_sinkbinding_between_the_node_js_server_and_broker"></a><a class="link" href="#_step_3_create_a_sinkbinding_between_the_node_js_server_and_broker">3.4. <strong>Step 3: Create a SinkBinding between the Node.js server and Broker</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image15.png" alt="image15" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Hardcoding URLs to connect with Kubernetes services in your application can be limiting and inflexible. A SinkBinding dynamically injects the URL of the Kubernetes service into your application.</p>
+</div>
+<div class="paragraph">
+<p>Learn more about SinkBinding [here](<a href="https://knative.dev/docs/eventing/custom-event-source/sinkbinding/){:target="_blank"}" class="bare">https://knative.dev/docs/eventing/custom-event-source/sinkbinding/){:target="_blank"}</a> and the [spec schema](<a href="https://knative.dev/docs/eventing/custom-event-source/sinkbinding/reference/){:target="_blank"}" class="bare">https://knative.dev/docs/eventing/custom-event-source/sinkbinding/reference/){:target="_blank"}</a>!</p>
+</div>
+<div class="paragraph">
+<p><strong>Create a SinkBinding:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1: Create a new YAML file named <code>node-server/config/300-sinkbinding.yaml</code> and add the following content:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: node-sinkbinding
+spec:
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    selector:
+      matchLabels:
+        app: node-server
+  sink: # In this case, the sink is our Broker, which is the eventing service that will receive the events
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: bookstore-broker</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2: Apply the YAML file:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f node-server/config/300-sinkbinding.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">sinkbinding.sources.knative.dev/node-sinkbinding created</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>???+ success "Verify"
+    Running the following command to list the sinkbindings:
+    ```bash
+    kubectl get sinkbindings</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```
+You should see the sinkbinding `node-sinkbinding` with `READY` status as `True`.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```
+NAME               SINK                                                                                AGE     READY   REASON
+node-sinkbinding   http://broker-ingress.knative-eventing.svc.cluster.local/default/bookstore-broker   2m43s   True</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_4_create_event_display_service"><a class="anchor" href="#_step_4_create_event_display_service"></a><a class="link" href="#_step_4_create_event_display_service">3.5. <strong>Step 4: Create event-display service</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image1.png" alt="image1" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Event display is a debugging tool in Knative Eventing that allows you to use it as a temporary destination (a.k.a sink) for your event to go.</p>
+</div>
+<div class="paragraph">
+<p><strong>Create an Event Display Service:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1: Create a new YAML file named <code>node-server/config/100-event-display.yaml</code> and add the following content:</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>???+ abstract "<em>node-server/config/100-event-display.yaml</em>"</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-display
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-display
+  template:
+    metadata:
+      labels:
+        app: event-display
+    spec:
+      containers:
+        - name: event-display
+          image: gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display
+          ports:
+            - containerPort: 8080</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-display
+spec:
+  selector:
+    app: event-display
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2: Apply the YAML file:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl apply -f node-server/config/100-event-display.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">deployment.apps/event-display created
+service/event-display created</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>???+ success "Verify"
+    Running the following command to list the pods:
+    <code><code>bash
+    kubectl get pods
+    </code></code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>You should see the pod `event-display-XXXXXXX-XXXXX` in "Running" status.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```
+NAME                                  READY   STATUS    RESTARTS   AGE
+bookstore-frontend-7b879ffb78-9bln6   1/1     Running   0          91m
+event-display-55967c745d-bxrgh        1/1     Running   0          4m44s
+node-server-644795d698-r9zlr          1/1     Running   0          4m43s
+```</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_5_create_a_trigger_that_connects_the_broker_and_event_display"><a class="anchor" href="#_step_5_create_a_trigger_that_connects_the_broker_and_event_display"></a><a class="link" href="#_step_5_create_a_trigger_that_connects_the_broker_and_event_display">3.6. <strong>Step 5: Create a Trigger that connects the Broker and event display</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image9.png" alt="image9" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>A Trigger is able to forward the event to the correct destination based on the [CloudEvent&#8217;s attributes](<a href="https://knative.dev/docs/eventing/#:~:text=Knative%20Eventing%20uses%20standard%20HTTP%20POST%20requests%20to%20send%20and%20receive%20events%20between%20event%20producers%20and%20sinks.%20These%20events%20conform%20to%20the%20CloudEvents%20specifications%2C%20which%20enables%20creating%2C%20parsing%2C%20sending%2C%20and%20receiving%20events%20in%20any%20programming%20language.){:target="_blank"}" class="bare">https://knative.dev/docs/eventing/#:~:text=Knative%20Eventing%20uses%20standard%20HTTP%20POST%20requests%20to%20send%20and%20receive%20events%20between%20event%20producers%20and%20sinks.%20These%20events%20conform%20to%20the%20CloudEvents%20specifications%2C%20which%20enables%20creating%2C%20parsing%2C%20sending%2C%20and%20receiving%20events%20in%20any%20programming%20language.){:target="_blank"}</a>. It is the connector between the Broker and the event destination.</p>
+</div>
+<div class="paragraph">
+<p>A Filter in the Trigger will <strong>filter the events based on the filter condition</strong>. You will specify your filter condition in the Trigger’s YAML file. <strong>If no filter is specified, the Trigger will forward all the events that the Broker received.</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image18.png" alt="image18" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>There is also a concept called [Channel](<a href="https://knative.dev/docs/eventing/channels/){:target="_blank"}" class="bare">https://knative.dev/docs/eventing/channels/){:target="_blank"}</a> in Knative, and generally speaking, you can treat Broker &amp; Trigger without filter the same as Channel &amp; Subscription.</p>
+</div>
+<div class="paragraph">
+<p>Learn more about Broker &amp; Trigger [here](<a href="https://knative.dev/docs/eventing/brokers/){:target="_blank"}" class="bare">https://knative.dev/docs/eventing/brokers/){:target="_blank"}</a>!</p>
+</div>
+<div class="paragraph">
+<p><strong>Create a Trigger:</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image20.png" alt="image20" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Here we are creating a Trigger that will send all the events to event-display.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image4.png" alt="image4" width="50%">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1: Create a new YAML file named <code>node-server/config/200-log-trigger.yaml</code> and add the following content:</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>???+ abstract "<em>node-server/config/200-log-trigger.yaml</em>"
+    <code><code>yaml
+    # This Trigger subscribes to the Broker and will forward all the events that it received to event-display.
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
+      name: log-trigger
+    spec:
+      broker: bookstore-broker
+      subscriber:
+        ref:
+          apiVersion: v1
+          kind: Service
+          name: event-display
+    </code></code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2: Apply the YAML file:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl apply -f node-server/config/200-log-trigger.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">trigger.eventing.knative.dev/log-trigger created</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>???+ success "Verify"
+    Running the following command to list the Triggers:
+    <code><code>bash
+    kubectl get triggers
+    </code></code>
+    The Trigger <code>log-trigger</code> should have <code>READY</code> status as <code>True</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```
+NAME                BROKER             SUBSCRIBER_URI                                                       AGE     READY   REASON
+log-trigger         bookstore-broker   http://event-display.default.svc.cluster.local                       6m2s    True
+```</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_validate"><a class="anchor" href="#_validate"></a><a class="link" href="#_validate">3.7. <strong>Validate</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image8.png" alt="image8" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Open the logs of the event-display with the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl logs -l=app=event-display -f</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>???+ success "Verify"
+    Type something in the comment box in the UI and click the submit button. The comment should appear in the event-display service with the following output:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```plaintext
+☁️  cloudevents.Event
+Validation: valid
+Context Attributes,
+specversion: 1.0
+type: new-review-comment
+source: bookstore-eda
+id: unique-comment-id
+datacontenttype: application/json
+Extensions,
+knativearrivaltime: 2024-05-19T05:27:36.232562628Z
+Data,
+{
+    "reviewText": "test"
+}
+```</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_next_step"><a class="anchor" href="#_next_step"></a><a class="link" href="#_next_step">3.8. <strong>Next Step</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page1/image13.png" alt="image13" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Please make sure you pass the Validate test before proceeding.</p>
+</div>
+<div class="paragraph">
+<p>[Go to Deploy ML workflow: Sentiment Analysis :fontawesome-solid-paper-plane:](../page-2/sentiment-analysis-service-for-bookstore-reviews.md){ .md-button .md-button&#8212;&#8203;primary }</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="04-01-setup.html#_environment_setup" class="query-params-link">3.1.2. Environment Setup</a></span>
+  <span class="next"><a href="05-prod-setup.html" class="query-params-link">4. Configuring OpenShift Serverless for Production</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img
+          src="../_/img/app-services-logo.png" height="40px" alt="Cloud Native Architecture Solution Patterns"  href="https://redhat.com" ></a>
+</footer><script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

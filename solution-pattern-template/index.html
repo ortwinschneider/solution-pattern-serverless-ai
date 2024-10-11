@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Solution Patterns: Template Name :: Solution Patterns for Cloud Native Architectures</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/index.html">
+    <link rel="next" href="02-architecture.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" style="font-size: 20px; color: white"
+        href="https://redhat-solution-patterns.github.io/solution-patterns">
+        <img src="../_/img/logo.png" height="35px" alt="Solution Patterns">&nbsp; Solution Patterns for Cloud Native Architectures</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Architectures &amp; Patterns</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/architect/portfolio/" target="_blank">Portfolio Architecture&nbsp; </a>
+            <a class="navbar-item" href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html"  target="_blank">Solution Patterns </a>
+            <a class="navbar-item" href="https://validatedpatterns.io/" target="_blank">Validated Patterns&nbsp;</a>
+            <a class="navbar-item" href="https://catalog.redhat.com/solutions" target="_blank">Ecosystem Solutions&nbsp;</a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Resources</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com">Red Hat Developers</a>
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com/app-dev-platform">App Dev Platform</a>
+            <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/application-foundations">Red Hat Application Services</a>
+          </div>
+        </div>
+
+          <a class="navbar-item" target="_blank" href="https://github.com/redhat-solution-patterns/redhat-solution-patterns.github.io/issues">Feedback</a>
+          <a class="navbar-item" target="_blank" href="https://redhat-solution-patterns.github.io/solution-patterns/contributors-guide.html">Contribute</a>
+
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="solution-pattern-template" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">Openshift Serverless for AI/ML</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">1. Home page</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#why-serverless">1.1 Why Serverless for AI/ML</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#use-cases">1.2 Use cases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#_the_story_behind_this_solution_pattern">1.3 The story behind this solution pattern</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#_the_solution">1.4 The solution</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html">2. OpenShift Serverless Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_components">2.1. Serverless components</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_serving">2.2. Knative Serving</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_eventing">2.3. Knative Eventing</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-solutions.html">3. See the Solutions in Action</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-workshop.html">3.1 Serverless Bookstore Lab</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-workshop.html#_what_are_we_building">3.1.1. About the workshop</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-01-setup.html#_environment_setup">3.1.2. Environment Setup</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-02-workshop.html#_send_review_comment_to_broker">3.2.3. Send comments to broker</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="05-prod-setup.html">4. Configuring OpenShift Serverless for Production</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="developer-resources.html">5. Developer Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#_resources">5.1 Resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#interactive-demos">5.2 Interactive Demos</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#demos">5.3 Demo Recordings</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html" target="_blank" rel="noopener">Explore Red Hat Solution Patterns</a></span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Openshift Serverless for AI/ML</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Openshift Serverless for AI/ML</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link is-current"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Openshift Serverless for AI/ML</a></li>
+    <li><a href="index.html">1. Home page</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/ortwinschneider/solution-pattern-serverless-ai/edit/main/documentation/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Solution Patterns: Template Name</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Red Hat OpenShift Serverless, built on the Knative project, optimizes hybrid cloud application development by boosting efficiency, scalability, and resource usage. By abstracting infrastructure complexities, it lets developers focus on coding, providing increased business value,  along with supporting multiple languages and frameworks. It also promotes application workload portability across various infrastructure environments, thanks to its integration with the hybrid and multi-cloud ecosystem provided by the  Red Hat OpenShift application platform.   Its automatic scaling feature adjusts applications to demand, including down to zero during inactivity, promoting optimal resource management. OpenShift Serverless, included with every OpenShift subscription, provides developers with comprehensive tools and resources for secure and reliable cloud-native event-driven application building, deployment, and management.</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rh-ai.png" alt="rh ai" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Contributors:</strong> <em>Ortwin Schneider(Red Hat)</em></p>
+</div>
+ <br>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Solutions Patterns help you understand the art of the possible with Red Hat&#8217;s portfolio, and not intended to be used as is for production environments. You are welcome use any part of this solution pattern for your own workloads.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="why-serverless"><a class="anchor" href="#why-serverless"></a><a class="link" href="#why-serverless">1. Why Serverless Computing for AI/ML?</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Serverless computing is highly relevant for machine learning (ML) for several key reasons:</p>
+</div>
+<div class="sect2">
+<h3 id="_scalability_on_demand"><a class="anchor" href="#_scalability_on_demand"></a><a class="link" href="#_scalability_on_demand">1.1. <strong>Scalability on Demand</strong></a></h3>
+<div class="paragraph">
+<p>Machine learning workloads, particularly in training and inference, often have fluctuating resource requirements. Training a model might require high computational power for a short period, while inference (predictions) needs minimal resources but at varying frequencies. Serverless platforms automatically scale resources based on demand, ensuring that you only use and pay for what you need. This eliminates the need for overprovisioning infrastructure.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cost_efficiency"><a class="anchor" href="#_cost_efficiency"></a><a class="link" href="#_cost_efficiency">1.2. <strong>Cost Efficiency</strong></a></h3>
+<div class="paragraph">
+<p>With serverless computing, you pay only for the compute time your code actually uses. ML models, especially during inference, may not be constantly running. Serverless allows you to deploy models that are idle until called upon, thus saving costs compared to maintaining always-on servers.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_simplified_operations"><a class="anchor" href="#_simplified_operations"></a><a class="link" href="#_simplified_operations">1.3. <strong>Simplified Operations</strong></a></h3>
+<div class="paragraph">
+<p>Serverless abstracts infrastructure management tasks such as server provisioning, patching, and scaling. For machine learning practitioners, this allows a focus on model development, training, and deployment rather than on the underlying infrastructure. This simplifies the process, especially for small teams or developers without deep DevOps expertise.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rapid_prototyping_and_experimentation"><a class="anchor" href="#_rapid_prototyping_and_experimentation"></a><a class="link" href="#_rapid_prototyping_and_experimentation">1.4. <strong>Rapid Prototyping and Experimentation</strong></a></h3>
+<div class="paragraph">
+<p>Machine learning often involves experimentation, requiring rapid iteration cycles for testing different models and approaches. Serverless environments allow developers to quickly deploy different versions of models, run experiments, and scale up or down based on results without needing to reconfigure infrastructure.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_event_driven_architectures"><a class="anchor" href="#_event_driven_architectures"></a><a class="link" href="#_event_driven_architectures">1.5. <strong>Event-Driven Architectures</strong></a></h3>
+<div class="paragraph">
+<p>Serverless platforms are ideal for event-driven ML applications, such as real-time prediction or data stream processing (e.g., IoT, mobile apps). In these cases, models can be invoked in response to specific triggers (like new data or user interactions) without the need for persistent servers. This makes it easy to build reactive, on-demand ML systems.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_seamless_integration_with_other_cloud_services"><a class="anchor" href="#_seamless_integration_with_other_cloud_services"></a><a class="link" href="#_seamless_integration_with_other_cloud_services">1.6. <strong>Seamless Integration with Other Cloud Services</strong></a></h3>
+<div class="paragraph">
+<p>Most serverless platforms (such as AWS Lambda, Azure Functions, or Google Cloud Functions) offer seamless integration with other managed services like data storage, databases, and analytics tools. This simplifies building end-to-end machine learning pipelines that encompass data preprocessing, model training, deployment, and monitoring without needing to manage the underlying infrastructure.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_latency_optimization_for_inference"><a class="anchor" href="#_latency_optimization_for_inference"></a><a class="link" href="#_latency_optimization_for_inference">1.7. <strong>Latency Optimization for Inference</strong></a></h3>
+<div class="paragraph">
+<p>For certain ML applications, low latency in predictions is critical. Serverless computing, when combined with edge computing or distributed cloud regions, enables inference to be executed closer to end-users, reducing latency and improving response times.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_global_reach"><a class="anchor" href="#_global_reach"></a><a class="link" href="#_global_reach">1.8. <strong>Global Reach</strong></a></h3>
+<div class="paragraph">
+<p>Serverless computing allows for globally distributed deployments. This is important for machine learning models that need to serve a worldwide audience. Models can be deployed close to where data is being generated or where users are located, improving performance and reducing the cost of long-distance data transfer.</p>
+</div>
+<div class="paragraph">
+<p>In summary, serverless computing aligns with the dynamic and resource-intensive nature of machine learning tasks, offering scalability, cost savings, and operational simplicity, making it highly relevant for modern machine learning workflows.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-cases"><a class="anchor" href="#use-cases"></a><a class="link" href="#use-cases">2. Use cases</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Serverless computing has become a powerful tool for AI and machine learning use cases, offering flexibility, scalability, and cost-efficiency. Here are some notable examples of how serverless architectures are used in AI/ML:</p>
+</div>
+<div class="sect2">
+<h3 id="_real_time_data_processing_and_predictive_analytics"><a class="anchor" href="#_real_time_data_processing_and_predictive_analytics"></a><a class="link" href="#_real_time_data_processing_and_predictive_analytics">2.1. <strong>Real-Time Data Processing and Predictive Analytics</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ai-predict.png" alt="ai predict" width="30%">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Use Case</strong>: Streaming IoT data or clickstream data to make real-time predictions.</p>
+</li>
+<li>
+<p><strong>Serverless Role</strong>: Serverless functions (e.g., AWS Lambda, Azure Functions) can process real-time data streams from IoT devices, analyze them, and make predictions using pre-trained ML models. For example, predictive maintenance for machinery could be done by processing sensor data in real-time and triggering alerts based on anomaly detection.</p>
+</li>
+<li>
+<p><strong>Example</strong>: An energy company monitoring smart meters in homes can use serverless architecture to detect unusual energy consumption and predict potential faults.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_image_and_video_recognition"><a class="anchor" href="#_image_and_video_recognition"></a><a class="link" href="#_image_and_video_recognition">2.2. <strong>Image and Video Recognition</strong></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Use Case</strong>: Automated image or video classification, object detection, or face recognition.</p>
+</li>
+<li>
+<p><strong>Serverless Role</strong>: A serverless function can be triggered when an image or video is uploaded to a storage service (like Amazon S3 or Google Cloud Storage). The function then processes the media using an AI model (e.g., TensorFlow) and returns the results, such as classifying objects in an image or identifying a face.</p>
+</li>
+<li>
+<p><strong>Example</strong>: A security application where security cameras upload video clips, and a serverless function runs object detection to identify suspicious activity in real time.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_natural_language_processing_nlp_for_chatbots"><a class="anchor" href="#_natural_language_processing_nlp_for_chatbots"></a><a class="link" href="#_natural_language_processing_nlp_for_chatbots">2.3. <strong>Natural Language Processing (NLP) for Chatbots</strong></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Use Case</strong>: Powering conversational agents and chatbots with real-time natural language processing.</p>
+</li>
+<li>
+<p><strong>Serverless Role</strong>: Serverless functions can be used to run NLP models that process and analyze user input in real-time. The functions can interact with external services, databases, and AI models to generate appropriate responses, improving chatbot functionality without needing always-on servers.</p>
+</li>
+<li>
+<p><strong>Example</strong>: A customer support chatbot in an e-commerce platform can use serverless computing to process queries, analyze user sentiment, and provide dynamic responses by leveraging NLP models.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_recommendation_engines"><a class="anchor" href="#_recommendation_engines"></a><a class="link" href="#_recommendation_engines">2.4. <strong>Recommendation Engines</strong></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Use Case</strong>: Providing personalized product, content, or service recommendations based on user behavior.</p>
+</li>
+<li>
+<p><strong>Serverless Role</strong>: Serverless functions can process data from user interactions (e.g., clicks, views, purchases) in real-time and run machine learning models to generate personalized recommendations. These functions can be triggered when users interact with an app or a website.</p>
+</li>
+<li>
+<p><strong>Example</strong>: An e-commerce platform can use serverless functions to trigger a recommendation engine that processes user behavior and suggests similar products during their browsing session.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_speech_to_text_and_text_to_speech_services"><a class="anchor" href="#_speech_to_text_and_text_to_speech_services"></a><a class="link" href="#_speech_to_text_and_text_to_speech_services">2.5. <strong>Speech-to-Text and Text-to-Speech Services</strong></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Use Case</strong>: Converting audio to text and vice versa for accessibility, transcription, or voice control applications.</p>
+</li>
+<li>
+<p><strong>Serverless Role</strong>: A serverless function can be invoked to run pre-trained models for converting speech to text or text to speech. This function can be triggered when an audio file is uploaded or when real-time audio input is received.</p>
+</li>
+<li>
+<p><strong>Example</strong>: A podcast transcription service can use serverless functions to automatically transcribe audio files to text whenever new episodes are uploaded.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fraud_detection_in_financial_transactions"><a class="anchor" href="#_fraud_detection_in_financial_transactions"></a><a class="link" href="#_fraud_detection_in_financial_transactions">2.6. <strong>Fraud Detection in Financial Transactions</strong></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Use Case</strong>: Identifying fraudulent transactions in real-time based on anomalous patterns in financial data.</p>
+</li>
+<li>
+<p><strong>Serverless Role</strong>: Serverless functions can process streams of transaction data in real-time, comparing them against trained models that flag unusual patterns. These functions scale automatically based on transaction volume.</p>
+</li>
+<li>
+<p><strong>Example</strong>: A fintech application can use serverless computing to scan each transaction as it occurs and run fraud detection algorithms that trigger alerts if fraud is suspected.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_automated_text_summarization"><a class="anchor" href="#_automated_text_summarization"></a><a class="link" href="#_automated_text_summarization">2.7. <strong>Automated Text Summarization</strong></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Use Case</strong>: Summarizing large text documents or news articles into concise summaries.</p>
+</li>
+<li>
+<p><strong>Serverless Role</strong>: A serverless function can be triggered when a document is uploaded, leveraging machine learning models for text summarization. The results can be returned to the user almost instantly without the need for dedicated servers.</p>
+</li>
+<li>
+<p><strong>Example</strong>: A news aggregator can summarize articles using serverless NLP models, allowing users to quickly read highlights of the news.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_model_deployment_for_inference"><a class="anchor" href="#_model_deployment_for_inference"></a><a class="link" href="#_model_deployment_for_inference">2.8. <strong>Model Deployment for Inference</strong></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Use Case</strong>: Deploying machine learning models to serve real-time predictions or classifications without managing infrastructure.</p>
+</li>
+<li>
+<p><strong>Serverless Role</strong>: Serverless functions can serve pre-trained models for inference when requests are made (e.g., predicting customer churn, classifying images). This setup allows businesses to deploy models without needing to maintain servers.</p>
+</li>
+<li>
+<p><strong>Example</strong>: A SaaS company can deploy a customer churn prediction model using serverless functions. When customer data is updated, a serverless function predicts churn likelihood and triggers retention workflows if needed.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_automated_email_classification_and_spam_detection"><a class="anchor" href="#_automated_email_classification_and_spam_detection"></a><a class="link" href="#_automated_email_classification_and_spam_detection">2.9. <strong>Automated Email Classification and Spam Detection</strong></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Use Case</strong>: Automatically classifying emails into categories like "Spam," "Important," or "Promotions."</p>
+</li>
+<li>
+<p><strong>Serverless Role</strong>: A serverless function can trigger every time a new email arrives. It uses an ML model to classify the email&#8217;s content and route it to the appropriate category. This reduces the need for users to manually organize their inboxes.</p>
+</li>
+<li>
+<p><strong>Example</strong>: A serverless email client service that classifies incoming emails in real-time based on user-defined rules and machine learning models trained on historical email data.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sentiment_analysis_for_social_media_monitoring"><a class="anchor" href="#_sentiment_analysis_for_social_media_monitoring"></a><a class="link" href="#_sentiment_analysis_for_social_media_monitoring">2.10. <strong>Sentiment Analysis for Social Media Monitoring</strong></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Use Case</strong>: Analyzing the sentiment of social media mentions about a brand or product.</p>
+</li>
+<li>
+<p><strong>Serverless Role</strong>: Serverless functions can be triggered whenever new mentions are detected on social media platforms (e.g., via APIs). These functions use sentiment analysis models to assess whether the mentions are positive, negative, or neutral.</p>
+</li>
+<li>
+<p><strong>Example</strong>: A marketing team can use serverless functions to automatically analyze social media sentiment in real time, allowing them to respond quickly to negative feedback.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In these examples, serverless computing plays a critical role in enabling scalable, cost-effective AI/ML solutions without the need for constant infrastructure management.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_story_behind_this_solution_pattern"><a class="anchor" href="#_the_story_behind_this_solution_pattern"></a><a class="link" href="#_the_story_behind_this_solution_pattern">3. The story behind this solution pattern</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A description of the story that was used to build the demo and architectures of this SP.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_solution"><a class="anchor" href="#_the_solution"></a><a class="link" href="#_the_solution">4. The Solution</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is a summary of the solution</p>
+</div>
+<div class="sect2">
+<h3 id="_embedding_html"><a class="anchor" href="#_embedding_html"></a><a class="link" href="#_embedding_html">4.1. Embedding HTML</a></h3>
+  <br>
+  <h3> Embed HTML by surrounding it with with four +s before and after. </h3>
+  <span>View the ascii doc to learn more</span>
+  <br>
+</div>
+<div class="sect2">
+<h3 id="_different_decorators"><a class="anchor" href="#_different_decorators"></a><a class="link" href="#_different_decorators">4.2. Different decorators</a></h3>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This is a Tip</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This is a NOTE</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This is a WARNING</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This is IMPORTANT</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_tables"><a class="anchor" href="#_creating_tables"></a><a class="link" href="#_creating_tables">4.3. Creating  tables</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>Column A</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Column <strong>A</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><em>Column C</em></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Lorem Ipsum</p>
+</li>
+<li>
+<p>Lorem Ipsum</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Lorem Ipsum</p>
+</li>
+<li>
+<p>Lorem Ipsum</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Lorem Ipsum</p>
+</li>
+<li>
+<p>Lorem Ipsum</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_content_that_can_be_copied"><a class="anchor" href="#_content_that_can_be_copied"></a><a class="link" href="#_content_that_can_be_copied">4.4. Content that can be copied</a></h3>
+<div class="paragraph">
+<p>Click below to copy the content</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell script hljs" data-lang="shell script">oc version #openshift cli client
+oc login --token=&lt;token&gt; --server=&lt;server&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="next"><a href="02-architecture.html" class="query-params-link">2. OpenShift Serverless Architecture</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img
+          src="../_/img/app-services-logo.png" height="40px" alt="Cloud Native Architecture Solution Patterns"  href="https://redhat.com" ></a>
+</footer><script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

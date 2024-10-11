@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Solution Pattern: Name Template :: Solution Patterns for Cloud Native Architectures</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/05-prod-setup.html">
+    <link rel="prev" href="04-02-workshop.html#_send_review_comment_to_broker">
+    <link rel="next" href="developer-resources.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" style="font-size: 20px; color: white"
+        href="https://redhat-solution-patterns.github.io/solution-patterns">
+        <img src="../_/img/logo.png" height="35px" alt="Solution Patterns">&nbsp; Solution Patterns for Cloud Native Architectures</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Architectures &amp; Patterns</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/architect/portfolio/" target="_blank">Portfolio Architecture&nbsp; </a>
+            <a class="navbar-item" href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html"  target="_blank">Solution Patterns </a>
+            <a class="navbar-item" href="https://validatedpatterns.io/" target="_blank">Validated Patterns&nbsp;</a>
+            <a class="navbar-item" href="https://catalog.redhat.com/solutions" target="_blank">Ecosystem Solutions&nbsp;</a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Resources</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com">Red Hat Developers</a>
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com/app-dev-platform">App Dev Platform</a>
+            <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/application-foundations">Red Hat Application Services</a>
+          </div>
+        </div>
+
+          <a class="navbar-item" target="_blank" href="https://github.com/redhat-solution-patterns/redhat-solution-patterns.github.io/issues">Feedback</a>
+          <a class="navbar-item" target="_blank" href="https://redhat-solution-patterns.github.io/solution-patterns/contributors-guide.html">Contribute</a>
+
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="solution-pattern-template" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">Openshift Serverless for AI/ML</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">1. Home page</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#why-serverless">1.1 Why Serverless for AI/ML</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#use-cases">1.2 Use cases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_story_behind_this_solution_pattern">1.3 The story behind this solution pattern</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_solution">1.4 The solution</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html">2. OpenShift Serverless Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_components">2.1. Serverless components</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_serving">2.2. Knative Serving</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_eventing">2.3. Knative Eventing</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-solutions.html">3. See the Solutions in Action</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-workshop.html">3.1 Serverless Bookstore Lab</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-workshop.html#_what_are_we_building">3.1.1. About the workshop</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-01-setup.html#_environment_setup">3.1.2. Environment Setup</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-02-workshop.html#_send_review_comment_to_broker">3.2.3. Send comments to broker</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="05-prod-setup.html">4. Configuring OpenShift Serverless for Production</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="developer-resources.html">5. Developer Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#_resources">5.1 Resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#interactive-demos">5.2 Interactive Demos</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#demos">5.3 Demo Recordings</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html" target="_blank" rel="noopener">Explore Red Hat Solution Patterns</a></span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Openshift Serverless for AI/ML</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Openshift Serverless for AI/ML</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Openshift Serverless for AI/ML</a></li>
+    <li><a href="05-prod-setup.html">4. Configuring OpenShift Serverless for Production</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/ortwinschneider/solution-pattern-serverless-ai/edit/main/documentation/modules/ROOT/pages/05-prod-setup.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Solution Pattern: Name Template</h1>
+<h1 id="_configure_knative_for_production" class="sect0"><a class="anchor" href="#_configure_knative_for_production"></a><a class="link" href="#_configure_knative_for_production">Configure Knative for Production</a></h1>
+<div class="openblock partintro">
+<div class="content">
+Configuring Knative for production involves several considerations to ensure scalability, reliability, security, and performance. Below are key examples of configurations for Knative&#8217;s core components—Serving, Eventing, and Networking—that are commonly adapted for production environments.
+</div>
+</div>
+<div class="sect1">
+<h2 id="_knative_serving_configuration"><a class="anchor" href="#_knative_serving_configuration"></a><a class="link" href="#_knative_serving_configuration">1. Knative Serving Configuration</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Knative Serving helps deploy and autoscale containers in Kubernetes. For production, you want to tune autoscaling, timeouts, and concurrency.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Autoscaling Settings</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Autoscaler ConfigMap (config-autoscaler.yaml): Adjust autoscaling to meet your traffic patterns, such as changing min and max scale, stabilization window, etc.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-autoscaler
+  namespace: knative-serving
+data:
+  max-scale-up-rate: "2"  # Limit how fast the number of pods can scale up
+  container-concurrency: "100"  # Number of requests a container can handle concurrently
+  scale-to-zero-threshold: "10m"  # Period before scaling down to zero
+  stable-window: "60s"  # Duration to smooth out scaling decisions
+  panic-window: "6s"  # Trigger aggressive scaling if traffic spikes</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Request Timeouts</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Timeout Configurations (config-network.yaml): Configure request timeouts to ensure that requests do not hang indefinitely.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-network
+  namespace: knative-serving
+data:
+  request-timeout-seconds: "300"  # Set the timeout for requests in seconds
+  max-revision-timeout-seconds: "600"  # Maximum allowed time for a single request</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Revision Limits</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Memory and CPU Resource Requests/Limits: Ensure Knative revisions can handle the expected traffic by configuring appropriate resource limits.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  template:
+    spec:
+      containers:
+        - image: my-app-image
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1024Mi"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_knative_eventing_configuration"><a class="anchor" href="#_knative_eventing_configuration"></a><a class="link" href="#_knative_eventing_configuration">2. Knative Eventing Configuration</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Knative Eventing helps create event-driven systems by integrating with multiple event sources.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>High Availability (HA) for Eventing Components</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure HA for Eventing Controllers: You can deploy multiple replicas of controllers to avoid a single point of failure.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventing-controller
+  namespace: knative-eventing
+spec:
+  replicas: 3  # Ensures high availability with 3 replicas</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Durable Event Delivery</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Broker and Channel Configuration: For reliable message delivery, configure durable channels and brokers using persistent storage (e.g., Kafka, RabbitMQ).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: messaging.knative.dev/v1
+kind: KafkaChannel
+metadata:
+  name: my-kafka-channel
+  namespace: default
+spec:
+  numPartitions: 3
+  replicationFactor: 3
+  retentionDuration: "168h"  # Keep messages for one week</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_networking_configuration"><a class="anchor" href="#_networking_configuration"></a><a class="link" href="#_networking_configuration">3. Networking Configuration</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Knative uses various networking layers (Istio, Contour, Kourier) for routing and ingress management. In production, you need to tune networking for security and performance.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Enable HTTPS for Secure Traffic</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Configure TLS: Use a TLS provider like Cert-Manager to handle certificates and enable HTTPS traffic.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-service-ingress
+  namespace: default
+spec:
+  tls:
+  - hosts:
+    - myapp.example.com
+    secretName: myapp-tls</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Custom Domain Configuration</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use Custom Domain:
+In production, you typically use custom domains instead of the default auto-generated ones.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-domain
+  namespace: knative-serving
+data:
+  example.com: ""</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Network Policy for Pod Security</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Configure Network Policy: Apply network policies to control traffic between pods to enhance security.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all
+  namespace: knative-serving
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress: []
+  egress: []</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_observability_monitoring"><a class="anchor" href="#_observability_monitoring"></a><a class="link" href="#_observability_monitoring">4. Observability &amp; Monitoring</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To monitor your Knative setup in production, integrate observability tools like Prometheus, Grafana, or others.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Enable Monitoring Metrics</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Prometheus Integration (config-observability.yaml): Enable metrics for Knative services and autoscalers to monitor performance.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-observability
+  namespace: knative-serving
+data:
+  request-metrics-backend-destination: prometheus  # Send metrics to Prometheus
+  enable-request-log: "true"</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Logging Configuration</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Fluentd for Centralized Logs: Configure Fluentd or another logging tool to aggregate logs from all Knative services.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-logging
+  namespace: knative-serving
+data:
+  logging.enable-json-log: "true"  # Enable structured logging</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_security_and_authentication"><a class="anchor" href="#_security_and_authentication"></a><a class="link" href="#_security_and_authentication">5. Security and Authentication</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To ensure security in production, you can use mutual TLS (mTLS) and authentication.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Enable Mutual TLS (mTLS)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Istio mTLS for Secure Communication:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: knative-serving
+spec:
+  mtls:
+    mode: STRICT</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Service Account for Permissions</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Assign Service Accounts for better control over access permissions:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: knative-user
+  namespace: knative-serving</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_scaling_and_performance"><a class="anchor" href="#_scaling_and_performance"></a><a class="link" href="#_scaling_and_performance">6. Scaling and Performance</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Scale Control: Configure horizontal pod autoscalers (HPA) based on CPU and memory usage for better scaling under load.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: activator
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a><a class="link" href="#_summary">7. Summary</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Autoscaling:</strong> Adjust parameters like concurrency, scale-up rate, and request timeouts.</p>
+</li>
+<li>
+<p><strong>Eventing:</strong> Enable HA, reliable messaging via Kafka, and delivery retries.</p>
+</li>
+<li>
+<p><strong>Networking:</strong> Secure communication with TLS, and control ingress/egress with policies.</p>
+</li>
+<li>
+<p><strong>Observability:</strong> Use Prometheus and structured logging for visibility into system health.</p>
+</li>
+<li>
+<p><strong>Security:</strong> Employ mTLS, network policies, and fine-grained permissions.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="04-02-workshop.html#_send_review_comment_to_broker" class="query-params-link">3.2.3. Send comments to broker</a></span>
+  <span class="next"><a href="developer-resources.html" class="query-params-link">5. Developer Resources</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img
+          src="../_/img/app-services-logo.png" height="40px" alt="Cloud Native Architecture Solution Patterns"  href="https://redhat.com" ></a>
+</footer><script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

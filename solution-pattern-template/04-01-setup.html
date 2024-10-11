@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Solution Pattern: Name Template :: Solution Patterns for Cloud Native Architectures</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/04-01-setup.html">
+    <link rel="prev" href="04-workshop.html">
+    <link rel="next" href="04-02-workshop.html#_send_review_comment_to_broker">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" style="font-size: 20px; color: white"
+        href="https://redhat-solution-patterns.github.io/solution-patterns">
+        <img src="../_/img/logo.png" height="35px" alt="Solution Patterns">&nbsp; Solution Patterns for Cloud Native Architectures</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Architectures &amp; Patterns</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/architect/portfolio/" target="_blank">Portfolio Architecture&nbsp; </a>
+            <a class="navbar-item" href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html"  target="_blank">Solution Patterns </a>
+            <a class="navbar-item" href="https://validatedpatterns.io/" target="_blank">Validated Patterns&nbsp;</a>
+            <a class="navbar-item" href="https://catalog.redhat.com/solutions" target="_blank">Ecosystem Solutions&nbsp;</a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Resources</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com">Red Hat Developers</a>
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com/app-dev-platform">App Dev Platform</a>
+            <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/application-foundations">Red Hat Application Services</a>
+          </div>
+        </div>
+
+          <a class="navbar-item" target="_blank" href="https://github.com/redhat-solution-patterns/redhat-solution-patterns.github.io/issues">Feedback</a>
+          <a class="navbar-item" target="_blank" href="https://redhat-solution-patterns.github.io/solution-patterns/contributors-guide.html">Contribute</a>
+
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="solution-pattern-template" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">Openshift Serverless for AI/ML</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">1. Home page</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#why-serverless">1.1 Why Serverless for AI/ML</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#use-cases">1.2 Use cases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_story_behind_this_solution_pattern">1.3 The story behind this solution pattern</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_solution">1.4 The solution</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html">2. OpenShift Serverless Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_components">2.1. Serverless components</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_serving">2.2. Knative Serving</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_eventing">2.3. Knative Eventing</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-solutions.html">3. See the Solutions in Action</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-workshop.html">3.1 Serverless Bookstore Lab</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-workshop.html#_what_are_we_building">3.1.1. About the workshop</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#_environment_setup">3.1.2. Environment Setup</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-02-workshop.html#_send_review_comment_to_broker">3.2.3. Send comments to broker</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="05-prod-setup.html">4. Configuring OpenShift Serverless for Production</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="developer-resources.html">5. Developer Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#_resources">5.1 Resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#interactive-demos">5.2 Interactive Demos</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#demos">5.3 Demo Recordings</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html" target="_blank" rel="noopener">Explore Red Hat Solution Patterns</a></span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Openshift Serverless for AI/ML</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Openshift Serverless for AI/ML</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Openshift Serverless for AI/ML</a></li>
+    <li><a href="03-solutions.html">3. See the Solutions in Action</a></li>
+    <li><a href="04-workshop.html">3.1 Serverless Bookstore Lab</a></li>
+    <li><a href="#_environment_setup">3.1.2. Environment Setup</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/ortwinschneider/solution-pattern-serverless-ai/edit/main/documentation/modules/ROOT/pages/04-01-setup.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Solution Pattern: Name Template</h1>
+<h1 id="_workshop_environment_setup" class="sect0"><a class="anchor" href="#_workshop_environment_setup"></a><a class="link" href="#_workshop_environment_setup">Workshop: Environment Setup</a></h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image20.png" alt="image20" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>In this page, we will be discussing how to set up your environment, and make sure to run up the UI front end and the Book Review Service’s node server.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_does_the_final_deliverable_for_this_section_look_like"><a class="anchor" href="#_what_does_the_final_deliverable_for_this_section_look_like"></a><a class="link" href="#_what_does_the_final_deliverable_for_this_section_look_like">1. <strong>What does the final deliverable for this section look like?</strong></a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>You have a running Kubernetes (k8s) cluster on your local machine, with Knative installed.</p>
+</li>
+<li>
+<p>You have your front end application deployed as Kubernetes deployment with port-forwarding to localhost:3000</p>
+</li>
+<li>
+<p>You have your Node.js application deployed as Kubernetes deployment with port-forwarding to localhost:8080</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We will be fulfilling each requirement with the order above.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_clone_the_repository"><a class="anchor" href="#_clone_the_repository"></a><a class="link" href="#_clone_the_repository">2. <strong>Clone the Repository</strong></a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image22.png" alt="image22" width="50%">
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">git clone https://github.com/knative/docs.git</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>???+ bug "Troubleshooting"
+    Having issue with cloning your repo? Check [here](<a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/troubleshooting-cloning-errors){:target="_blank"}" class="bare">https://docs.github.com/en/repositories/creating-and-managing-repositories/troubleshooting-cloning-errors){:target="_blank"}</a> for help.</p>
+</div>
+<div class="paragraph">
+<p>!!! warning</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>**IMPORTANT**: Please take some time to read the [Disclaimer](../disclaimer/README.md){:target="_blank"} before moving to the next page.</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_file_structure"><a class="anchor" href="#_file_structure"></a><a class="link" href="#_file_structure">3. <strong>File Structure</strong></a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image21.png" alt="image21" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>The code for the sample app is in <code>docs/code-samples/eventing/bookstore-sample-app</code></p>
+</div>
+<div class="paragraph">
+<p>Under <code>bookstore-sample-app</code> folder, there are 2 folders:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>/solution</strong>: this folder contains all the yaml files, and the code you needed. Check it when you got stuck.</p>
+</li>
+<li>
+<p><strong>/start</strong>: this folder contains the necessary files for you to get started. Save there all the configuration files yourself following the tutorial!</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image16.png" alt="image16" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>!!! tip
+    Kuack suggests you to start from <strong>/start</strong>, write all the configuration files as you go over the tutorial, and check solutions when you got stuck.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image1.png" alt="image1" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Always <code>cd</code> back to the root directory, which is <code>/start</code>, before running any commands.</p>
+</div>
+<div class="paragraph">
+<p>All the commands in the tutorial are written <strong>assuming you are in the <code>/start</code> directory</strong>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_shortcut"><a class="anchor" href="#_shortcut"></a><a class="link" href="#_shortcut">4. <strong>Shortcut</strong></a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image10.png" alt="image10" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Running <code>docs/code-samples/eventing/bookstore-sample-app/start/setup.sh</code> will automatically complete all tasks in this section.</p>
+</div>
+<div class="paragraph">
+<p>!!! warning</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>However, if you are not familiar with the process, we recommend reviewing the steps below.</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_instructions"><a class="anchor" href="#_instructions"></a><a class="link" href="#_instructions">5. <strong>Instructions</strong></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_task_1_set_up_a_running_kubernetes_cluster_with_knative_installed"><a class="anchor" href="#_task_1_set_up_a_running_kubernetes_cluster_with_knative_installed"></a><a class="link" href="#_task_1_set_up_a_running_kubernetes_cluster_with_knative_installed">5.1. <strong>Task 1: Set Up a Running Kubernetes Cluster with Knative Installed</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image13.png" alt="image13" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>!!! tip</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>We recommend you using `kn quickstart` plugin to install Knative.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please follow the instructions [here](<a href="https://knative.dev/docs/install/){:target="_blank"}" class="bare">https://knative.dev/docs/install/){:target="_blank"}</a> to spin up your cluster with Knative installed!</p>
+</div>
+<div class="paragraph">
+<p>???+ success "Verify"</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>You should see the pods in the `knative-eventing` and `knative-serving` namespaces running before proceeding.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```
+NAMESPACE          NAME                                      READY   STATUS    RESTARTS   AGE
+knative-eventing   eventing-controller-7576f555d5-7c2p2      1/1     Running   0          4m50s
+knative-eventing   eventing-webhook-5874bb8445-cqcn9         1/1     Running   0          4m50s
+knative-eventing   imc-controller-8c5d5ddb5-m249l            1/1     Running   0          4m49s
+knative-eventing   imc-dispatcher-76d9f7464b-dphd6           1/1     Running   0          4m49s
+knative-eventing   mt-broker-controller-8d8f8d48f-rvlcv      1/1     Running   0          4m48s
+knative-eventing   mt-broker-filter-85c457f879-dvhnj         1/1     Running   0          4m48s
+knative-eventing   mt-broker-ingress-5688f4cd68-nm8cc        1/1     Running   0          4m48s
+knative-serving    activator-55d856fccd-g5qpw                1/1     Running   0          4m53s
+knative-serving    autoscaler-5fb49c64c7-hrjng               1/1     Running   0          4m53s
+knative-serving    controller-ddbb9d4f-khttq                 1/1     Running   0          4m53s
+knative-serving    net-kourier-controller-68d89f78d5-hw8r6   1/1     Running   0          4m52s
+knative-serving    webhook-85b9744fc5-6w9sg                  1/1     Running   0          4m53s
+kourier-system     3scale-kourier-gateway-dbc5b88f5-7g29n    1/1     Running   0          4m52s
+kube-system        coredns-5dd5756b68-49xsj                  1/1     Running   0          12m
+kube-system        etcd-minikube                             1/1     Running   0          12m
+kube-system        kube-apiserver-minikube                   1/1     Running   0          12m
+kube-system        kube-controller-manager-minikube          1/1     Running   0          12m
+kube-system        kube-proxy-tqcvx                          1/1     Running   0          12m
+kube-system        kube-scheduler-minikube                   1/1     Running   0          12m
+kube-system        storage-provisioner                       1/1     Running   0          12m
+```</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_task_2_running_the_bookstore_web_app"><a class="anchor" href="#_task_2_running_the_bookstore_web_app"></a><a class="link" href="#_task_2_running_the_bookstore_web_app">5.2. <strong>Task 2: Running the Bookstore Web App</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image12.png" alt="image12" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>The Next.js frontend app is located in the <code>docs/code-samples/eventing/bookstore-sample-app/start/frontend</code> folder.</p>
+</div>
+<div class="paragraph">
+<p>Ensure that port 3000 on your local machine is not being used by another application.</p>
+</div>
+<div class="sect3">
+<h4 id="_deploy_the_frontend_app"><a class="anchor" href="#_deploy_the_frontend_app"></a><a class="link" href="#_deploy_the_frontend_app">5.2.1. <strong>Deploy the Frontend App</strong></a></h4>
+<div class="paragraph">
+<p>You can either [build the image locally](<a href="https://docs.docker.com/get-started/02_our_app/){:target="_blank"}" class="bare">https://docs.docker.com/get-started/02_our_app/){:target="_blank"}</a> or use our pre-built image. If you are using the pre-built image, you can proceed to the next step.</p>
+</div>
+<div class="paragraph">
+<p>When ready, run the following command to deploy the frontend app:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">kubectl apply -f frontend/config/100-front-end-deployment.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will create the Deployment and expose it with a Service of type LoadBalancer to receive external traffic:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">deployment.apps/bookstore-frontend created
+service/bookstore-frontend-svc created</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>???+ success "Verify"
+    Run the following command to check if the pod is running:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```shell
+kubectl get pods
+```</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>You will see that your front end pod is running.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```
+NAME                                  READY   STATUS    RESTARTS   AGE
+bookstore-frontend-7b879ffb78-9bln6   1/1     Running   0          4m37s
+```</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_port_forwarding_optional_under_condition"><a class="anchor" href="#_port_forwarding_optional_under_condition"></a><a class="link" href="#_port_forwarding_optional_under_condition">5.2.2. <strong>Port Forwarding (Optional under condition)</strong></a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image9.png" alt="image9" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>You might need to set up port forwarding to access the app from your local machine.</p>
+</div>
+<div class="paragraph">
+<p>Check if port forwarding is necessary by running:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">kubectl get services</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you will see the following console output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+bookstore-frontend-svc   LoadBalancer   10.99.187.173   &lt;pending&gt;     3000:31600/TCP   27m
+kubernetes               ClusterIP      10.96.0.1       &lt;none&gt;        443/TCP          39m</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>!!! note
+    If the <code>EXTERNAL-IP</code> for your frontend service is <code>127.0.0.1</code>, port forwarding is not needed.</p>
+</div>
+<div class="paragraph">
+<p>If port forwarding is required, run the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">kubectl port-forward svc/bookstore-frontend-svc 3000:3000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Forwarding from 127.0.0.1:3000 -&gt; 3000
+Forwarding from [::1]:3000 -&gt; 3000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Don&#8217;t close the terminal when port-forwarding is established.</strong> Start a new terminal to run the next command.</p>
+</div>
+<div class="paragraph">
+<p>???+ success "Verify"</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Visit [http://localhost:3000](http://localhost:3000){:target="_blank"} in your browser. The UI page should appear!</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image19.png" alt="image19" width="50%">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_task_3_running_the_book_review_service"><a class="anchor" href="#_task_3_running_the_book_review_service"></a><a class="link" href="#_task_3_running_the_book_review_service">5.3. <strong>Task 3: Running the Book Review Service</strong></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image6.png" alt="image6" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>The Node.js server is located in the <code>node-server</code> folder.</p>
+</div>
+<div class="paragraph">
+<p>!!! warning</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Ensure that port 8080 on your local machine is not being used by another application.</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deploy_the_book_review_service_node_js_server"><a class="anchor" href="#_deploy_the_book_review_service_node_js_server"></a><a class="link" href="#_deploy_the_book_review_service_node_js_server">5.3.1. <strong>Deploy the Book Review Service: Node.js Server</strong></a></h4>
+<div class="paragraph">
+<p>You can either [build the image locally](<a href="https://docs.docker.com/get-started/02_our_app/){:target="_blank"}" class="bare">https://docs.docker.com/get-started/02_our_app/){:target="_blank"}</a> or use our pre-built image. If you are using the pre-built image, you can proceed to the next step.</p>
+</div>
+<div class="paragraph">
+<p>When ready, run the following command to deploy the Node.js server:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">kubectl apply -f node-server/config/100-deployment.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command will pull the image and deploy it to your cluster as a Deployment. It will also expose it as a LoadBalancer to receive external traffic.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">deployment.apps/node-server created
+service/node-server-svc created</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>???+ success "Verify"</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Run the following command to check if the pod is running:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```shell
+kubectl get pods
+```</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>You will see that your Node.js server (node-server) pod is running.
+```
+NAME                                  READY   STATUS    RESTARTS   AGE
+bookstore-frontend-7b879ffb78-9bln6   1/1     Running   0          39m
+node-server-68bf98cdf4-skjmh          1/1     Running   0          38m
+```</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_port_forwarding_optional_under_condition_2"><a class="anchor" href="#_port_forwarding_optional_under_condition_2"></a><a class="link" href="#_port_forwarding_optional_under_condition_2">5.3.2. <strong>Port Forwarding (optional under condition)</strong></a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image9.png" alt="image9" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>You might need to set up port forwarding to access the app from your local machine.</p>
+</div>
+<div class="paragraph">
+<p>Check if port forwarding is necessary by running:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">kubectl get services</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you will see the following console output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+bookstore-frontend-svc   LoadBalancer   10.99.187.173   &lt;pending&gt;     3000:31600/TCP   73m
+kubernetes               ClusterIP      10.96.0.1       &lt;none&gt;        443/TCP          85m
+node-server-svc          LoadBalancer   10.101.90.35    &lt;pending&gt;     80:31792/TCP     73m</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>!!! note
+    If the <code>EXTERNAL-IP</code> for your Node.js service is <code>127.0.0.1</code>, port forwarding is not needed. If you failed to visit the page <code>localhost:8080</code>, you can try to set up port forwarding.</p>
+</div>
+<div class="paragraph">
+<p>If port forwarding is required, open a new terminal and run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">kubectl port-forward svc/node-server-svc 8080:80</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Forwarding from 127.0.0.1:8080 &gt; 8000
+Forwarding from [::1]:8080 &gt; 8000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Don&#8217;t close the terminal when port-forwarding is established.</strong> Start a new terminal to run the next command.</p>
+</div>
+<div class="paragraph">
+<p>???+ success "Verify"</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Visit [http://localhost:8080](http://localhost:8080){:target="_blank"} in your browser. The Node.js service should be up and running.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>And in your front end page, you should see the status turns green and say "Connected to node server".</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image18.png" alt="image18" width="50%">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a><a class="link" href="#_troubleshooting">6. <strong>Troubleshooting</strong></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you encounter any issues during the setup process, refer to the troubleshooting section in the documentation or check the logs of your Kubernetes pods for more details.
+???+ bug "Troubleshooting"</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>To check the logs, use the following command:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>```shell
+kubectl logs &lt;pod-name&gt;
+```</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Replace `&lt;pod-name&gt;` with the name of the pod you want to check.</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_step"><a class="anchor" href="#_next_step"></a><a class="link" href="#_next_step">7. <strong>Next Step</strong></a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/image5.png" alt="image5" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>You have successfully set up the cluster with Knative installed, and running your front end app and node server. You are all set to start learning. Your journey begins from here.</p>
+</div>
+<div class="paragraph">
+<p>[Go to Lesson 1 - Send Review Comment to Broker :fontawesome-solid-paper-plane:](../page-1/send-review-comment-to-broker.md){ .md-button .md-button&#8212;&#8203;primary }</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="04-workshop.html" class="query-params-link">3.1 Serverless Bookstore Lab</a></span>
+  <span class="next"><a href="04-02-workshop.html#_send_review_comment_to_broker" class="query-params-link">3.2.3. Send comments to broker</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img
+          src="../_/img/app-services-logo.png" height="40px" alt="Cloud Native Architecture Solution Patterns"  href="https://redhat.com" ></a>
+</footer><script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

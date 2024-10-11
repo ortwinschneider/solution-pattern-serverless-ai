@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Solution Pattern: Name Template :: Solution Patterns for Cloud Native Architectures</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/04-workshop.html">
+    <link rel="prev" href="03-solutions.html">
+    <link rel="next" href="04-01-setup.html#_environment_setup">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" style="font-size: 20px; color: white"
+        href="https://redhat-solution-patterns.github.io/solution-patterns">
+        <img src="../_/img/logo.png" height="35px" alt="Solution Patterns">&nbsp; Solution Patterns for Cloud Native Architectures</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Architectures &amp; Patterns</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/architect/portfolio/" target="_blank">Portfolio Architecture&nbsp; </a>
+            <a class="navbar-item" href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html"  target="_blank">Solution Patterns </a>
+            <a class="navbar-item" href="https://validatedpatterns.io/" target="_blank">Validated Patterns&nbsp;</a>
+            <a class="navbar-item" href="https://catalog.redhat.com/solutions" target="_blank">Ecosystem Solutions&nbsp;</a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Resources</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com">Red Hat Developers</a>
+            <a class="navbar-item" target="_blank" href="https://developers.redhat.com/app-dev-platform">App Dev Platform</a>
+            <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/application-foundations">Red Hat Application Services</a>
+          </div>
+        </div>
+
+          <a class="navbar-item" target="_blank" href="https://github.com/redhat-solution-patterns/redhat-solution-patterns.github.io/issues">Feedback</a>
+          <a class="navbar-item" target="_blank" href="https://redhat-solution-patterns.github.io/solution-patterns/contributors-guide.html">Contribute</a>
+
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="solution-pattern-template" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">Openshift Serverless for AI/ML</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">1. Home page</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#why-serverless">1.1 Why Serverless for AI/ML</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#use-cases">1.2 Use cases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_story_behind_this_solution_pattern">1.3 The story behind this solution pattern</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_the_solution">1.4 The solution</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html">2. OpenShift Serverless Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_components">2.1. Serverless components</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_serving">2.2. Knative Serving</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#_knative_eventing">2.3. Knative Eventing</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-solutions.html">3. See the Solutions in Action</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-workshop.html">3.1 Serverless Bookstore Lab</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#_what_are_we_building">3.1.1. About the workshop</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-01-setup.html#_environment_setup">3.1.2. Environment Setup</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-02-workshop.html#_send_review_comment_to_broker">3.2.3. Send comments to broker</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="05-prod-setup.html">4. Configuring OpenShift Serverless for Production</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="developer-resources.html">5. Developer Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#_resources">5.1 Resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#interactive-demos">5.2 Interactive Demos</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-resources.html#demos">5.3 Demo Recordings</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><a href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html" target="_blank" rel="noopener">Explore Red Hat Solution Patterns</a></span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Openshift Serverless for AI/ML</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Openshift Serverless for AI/ML</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Openshift Serverless for AI/ML</a></li>
+    <li><a href="03-solutions.html">3. See the Solutions in Action</a></li>
+    <li><a href="04-workshop.html">3.1 Serverless Bookstore Lab</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/ortwinschneider/solution-pattern-serverless-ai/edit/main/documentation/modules/ROOT/pages/04-workshop.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Solution Pattern: Name Template</h1>
+<h1 id="_welcome_knative_bookstore_tutorial" class="sect0"><a class="anchor" href="#_welcome_knative_bookstore_tutorial"></a><a class="link" href="#_welcome_knative_bookstore_tutorial">Welcome: Knative Bookstore Tutorial</a></h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/page0/1.png" alt="1" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Welcome to Knative&#8217;s End-to-End Sample Application Tutorial!</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Are you completely new to Knative and unsure where to start?</p>
+</li>
+<li>
+<p>Are you considering converting your application to an event-driven architecture but don&#8217;t know how?</p>
+</li>
+<li>
+<p>Are you curious to see what Knative can do in real life?</p>
+</li>
+<li>
+<p>Are you new to the cloud computing world and looking to get started with open source?</p>
+<div class="literalblock">
+<div class="content">
+<pre>If any of these resonate with you, you've found the perfect starting point.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In this tutorial, we will construct an online bookstore application. This interactive guide, suitable for beginners and experienced engineers alike, will take you through the steps of building, deploying, and monitoring an application using OpenShift Serverless powerful features. For those familiar with the process, concise graphics are available to streamline your learning experience.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_are_we_building"><a class="anchor" href="#_what_are_we_building"></a><a class="link" href="#_what_are_we_building">1. What are we building?</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/page0/2.png" alt="2" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Our App is an online bookstore that sells a single book. Customers can post comments about the book anonymously, with each comment displayed alongside an emoji reflecting the sentiment of the comment. Comments with inappropriate content are automatically filtered out, discarded, and logged in the backend.</p>
+</div>
+<div class="paragraph">
+<p>As the bookstore owner, you&#8217;ll receive notifications via Slack each time if a comment containing a "bad word" is submitted.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_learning_objective"><a class="anchor" href="#_learning_objective"></a><a class="link" href="#_learning_objective">2. Learning Objective</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/page0/3.png" alt="3" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>You will learn Event-Driven Architecture (EDA) and how it contrasts with traditional application designs that use microservices and REST APIs. You&#8217;ll learn:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>The Fundamentals of EDA</strong>: Explore the core principles of event-driven architecture and how it enhances responsiveness and scalability in applications.</p>
+</li>
+<li>
+<p><strong>Comparative Insights</strong>: Understand the differences between EDA and traditional architectures, highlighting the benefits and use cases of each.</p>
+</li>
+<li>
+<p><strong>Practical Application</strong>: Discover how to transition your existing applications to an event-driven model, utilizing the powerful features of Knative Eventing.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page0/4.png" alt="4" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Knative is a powerful framework that operates on top of Kubernetes. This tutorial will guide you through:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Setting Up Your Cluster</strong>: You&#8217;ll start by spinning up your own Kubernetes cluster, which is the foundation for deploying and managing containers.</p>
+</li>
+<li>
+<p><strong>Exploring Knative</strong>: Gain hands-on experience with key Knative concepts and components.</p>
+</li>
+<li>
+<p><strong>Some example use cases of Knative</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By the end of this tutorial, you will not only understand these concepts but also feel comfortable implementing them, empowering you to build robust, scalable event-driven applications with Knative.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bookstore_architecture"><a class="anchor" href="#_bookstore_architecture"></a><a class="link" href="#_bookstore_architecture">3. Bookstore Architecture</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/page0/5.png" alt="5" width="100%">
+</div>
+</div>
+<div class="paragraph">
+<p>The bookstore application consists of the following components:</p>
+</div>
+<div class="sect2">
+<h3 id="_user_interface"><a class="anchor" href="#_user_interface"></a><a class="link" href="#_user_interface">3.1. User Interface</a></h3>
+<div class="paragraph">
+<p>A frontend Next.js application that interacts with these services. It is a web page where users can select a book to view its details, ratings and reviews.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_database_service"><a class="anchor" href="#_database_service"></a><a class="link" href="#_database_service">3.2. Database Service</a></h3>
+<div class="paragraph">
+<p>An in-memory PostgreSQL instance on Kubernetes, storing all user comments.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_book_reviews_service"><a class="anchor" href="#_book_reviews_service"></a><a class="link" href="#_book_reviews_service">3.3. Book Reviews Service</a></h3>
+<div class="paragraph">
+<p>A Node.js web server that will perform the event forwarding, database operation, and handling the websocket connection.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_notification_service"><a class="anchor" href="#_notification_service"></a><a class="link" href="#_notification_service">3.4. Notification Service</a></h3>
+<div class="paragraph">
+<p>An Apache Camel K pipe that connects our event-driven architecture with a third-party webhook: Slack. It receives the CloudEvent and sends it as a message to a Slack Workspace.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ml_models_service"><a class="anchor" href="#_ml_models_service"></a><a class="link" href="#_ml_models_service">3.5. ML Models Service</a></h3>
+<div class="paragraph">
+<p>There are 2 Machine learning workflows that can conduct sentiment analysis on user&#8217;s review comment and hateful word sanity check. You will be using a [Knative Sequence](<a href="https://knative.dev/docs/eventing/flows/sequence/){:target="_blank"}" class="bare">https://knative.dev/docs/eventing/flows/sequence/){:target="_blank"}</a> to make sure they are executed in order.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_book_store_broker"><a class="anchor" href="#_book_store_broker"></a><a class="link" href="#_book_store_broker">3.6. Book Store Broker</a></h3>
+<div class="paragraph">
+<p>It acts as the central brain of our event-driven architecture. It connects all the microservices together, receives the event, and makes sure all the events are safely delivered to the correct destination.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bad_word_broker"><a class="anchor" href="#_bad_word_broker"></a><a class="link" href="#_bad_word_broker">3.7. Bad Word Broker</a></h3>
+<div class="paragraph">
+<p>It acts as the bridge between the book store Broker and the Slack Sink, so we can send notification to your Slack when a comment containing "bad word" is submitted.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_workshop_structure"><a class="anchor" href="#_workshop_structure"></a><a class="link" href="#_workshop_structure">4. Workshop Structure</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We will be building the sample app in this order:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="04-01-setup.html#_environment_setup" class="xref page">Environment Setup</a>: Set up the environment for the tutorial. This includes installing the cluster, the frontend and the backend.</p>
+</li>
+<li>
+<p>[<strong>Send comments to the Broker</strong>](../page-1/send-review-comment-to-broker.md){:target="_blank"}: Pass reviews from the frontend to event-display via the Broker. This involves learning about Broker, SinkBinding and CloudEvents event types.</p>
+</li>
+<li>
+<p>[<strong>Deploy Sentiment Analysis Service</strong>](../page-2/sentiment-analysis-service-for-bookstore-reviews.md){:target="_blank"}: Gain knowledge on deploying a sentiment analysis service using Knative Function.</p>
+</li>
+<li>
+<p>[<strong>Deploy Bad Word Filter Service</strong>](../page-3/create-bad-word-filter-service.md){:target="_blank"}: Implement a bad word filter service using Knative Function yourself.</p>
+</li>
+<li>
+<p>[<strong>Use a Sequence to Run the ML Workflows in order</strong>](../page-4/create-sequence-to-streamline-ML-workflows.md){:target="_blank"}: Learn how to utilize a Knative Sequence to ensure your ML workflows executes in order.</p>
+</li>
+<li>
+<p>[<strong>Database Deployment</strong>](../page-5//deploy-database-service.md){:target="_blank"}: Understand the deployment of an in-memory PostgreSQL instance using a plain Kubernetes deployment.</p>
+</li>
+<li>
+<p>[<strong>Advanced event filtering</strong>](../page-6/advanced-event-filtering.md){:target="_blank"}: Integrate all components by receiving "analyzed reviews" via Broker (using a Trigger) and storing them into the database. This includes learning about Triggers and Filters.</p>
+</li>
+<li>
+<p>[<strong>Connect with External Services/API</strong>](../page-7/slack-sink-learning-knative-eventing-and-apache-camel-K-integration.md){:target="_blank"}: Learn how to connect your application with external services and APIs using Knative Eventing and Apache Camel K integrations.</p>
+</li>
+<li>
+<p>[<strong>Extra Challenges</strong>](../extra-challenge/README.md){:target="_blank"}: Additional challenges to test your understanding of the concepts learned in the tutorial.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_to_properly_learn"><a class="anchor" href="#_how_to_properly_learn"></a><a class="link" href="#_how_to_properly_learn">5. How to properly learn?</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_preview_the_final_bookstore_1_minute_demo_video"><a class="anchor" href="#_preview_the_final_bookstore_1_minute_demo_video"></a><a class="link" href="#_preview_the_final_bookstore_1_minute_demo_video">5.1. Preview the Final Bookstore: 1-Minute Demo Video</a></h3>
+<div class="paragraph">
+<p>To help you visualize what you&#8217;ll be creating, we&#8217;ve prepared a brief demo video. This two-minute preview showcases the final bookstore application, providing a clearer understanding of what you can expect to build.</p>
+</div>
+<div class="videoblock">
+<div class="content">
+<iframe width="100%" height="512" src="https://www.youtube.com/embed/5D8pTcQSacw?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="paragraph">
+<p>"Video not working above?" If the video is not working, you can watch it <a href="https://www.youtube.com/watch?v=5D8pTcQSacw">here</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_by_step_guidance_for_beginners"><a class="anchor" href="#_step_by_step_guidance_for_beginners"></a><a class="link" href="#_step_by_step_guidance_for_beginners">5.2. Step-by-Step Guidance for Beginners</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page0/9.png" alt="9" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>This tutorial is meticulously structured to be beginner-friendly, featuring detailed, step-by-step instructions for building the sample app. Simply follow the sequence we&#8217;ve laid out: each section builds upon the previous, guiding you through the construction of the application. Should you encounter any hurdles, the Knative community is a fantastic resource for support. Don&#8217;t hesitate to ask questions and seek advice. Check the [Help](#help) section below!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_accelerated_learning_path_for_advanced_users"><a class="anchor" href="#_accelerated_learning_path_for_advanced_users"></a><a class="link" href="#_accelerated_learning_path_for_advanced_users">5.3. Accelerated Learning Path for Advanced Users</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/page0/10.png" alt="10" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>If you find the tutorial too basic, or if it covers familiar territory, feel free to adjust your learning approach. Each section of the tutorial is accompanied by concise graphics that summarize key concepts. Advanced learners can choose to focus on these graphics to grasp the essentials faster, streamlining the learning experience without sacrificing depth or understanding.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_help"><a class="anchor" href="#_help"></a><a class="link" href="#_help">6. Help</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/page0/11.png" alt="11" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Join the supportive Knative community via the Cloud Native Computing Foundation (CNCF) Slack, particularly the [#knative](<a href="https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"}" class="bare">https://cloud-native.slack.com/archives/C04LGHDR9K7){:target="_blank"}</a> channel. Before posting your questions, please search to see if they&#8217;ve already been answered. Your feedback on this tutorial is invaluable, so don&#8217;t hesitate to reach out with suggestions or questions.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_step"><a class="anchor" href="#_next_step"></a><a class="link" href="#_next_step">7. Next Step</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/page0/13.png" alt="13" width="50%">
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s set up the environment first.</p>
+</div>
+<div class="paragraph">
+<p><a href="04-01-setup.html#_environment_setup" class="xref page">Go to Environment Setup</a></p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="03-solutions.html" class="query-params-link">3. See the Solutions in Action</a></span>
+  <span class="next"><a href="04-01-setup.html#_environment_setup" class="query-params-link">3.1.2. Environment Setup</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img
+          src="../_/img/app-services-logo.png" height="40px" alt="Cloud Native Architecture Solution Patterns"  href="https://redhat.com" ></a>
+</footer><script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
