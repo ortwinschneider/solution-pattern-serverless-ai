@@ -1,0 +1,282 @@
+= Solution Pattern: Name Template
+:sectnums:
+:sectlinks:
+:doctype: book
+
+= Configure Knative for Production
+
+Configuring Knative for production involves several considerations to ensure scalability, reliability, security, and performance. Below are key examples of configurations for Knative's core components—Serving, Eventing, and Networking—that are commonly adapted for production environments.
+
+==  Knative Serving Configuration
+
+Knative Serving helps deploy and autoscale containers in Kubernetes. For production, you want to tune autoscaling, timeouts, and concurrency.
+
+* Autoscaling Settings
+
+** Autoscaler ConfigMap (config-autoscaler.yaml): Adjust autoscaling to meet your traffic patterns, such as changing min and max scale, stabilization window, etc.
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-autoscaler
+  namespace: knative-serving
+data:
+  max-scale-up-rate: "2"  # Limit how fast the number of pods can scale up
+  container-concurrency: "100"  # Number of requests a container can handle concurrently
+  scale-to-zero-threshold: "10m"  # Period before scaling down to zero
+  stable-window: "60s"  # Duration to smooth out scaling decisions
+  panic-window: "6s"  # Trigger aggressive scaling if traffic spikes
+----
+
+* Request Timeouts
+
+** Timeout Configurations (config-network.yaml): Configure request timeouts to ensure that requests do not hang indefinitely.
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-network
+  namespace: knative-serving
+data:
+  request-timeout-seconds: "300"  # Set the timeout for requests in seconds
+  max-revision-timeout-seconds: "600"  # Maximum allowed time for a single request
+----
+
+* Revision Limits
+
+** Memory and CPU Resource Requests/Limits: Ensure Knative revisions can handle the expected traffic by configuring appropriate resource limits.
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  template:
+    spec:
+      containers:
+        - image: my-app-image
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1024Mi"
+
+----
+
+== Knative Eventing Configuration
+
+Knative Eventing helps create event-driven systems by integrating with multiple event sources.
+
+* High Availability (HA) for Eventing Components
+
+** Ensure HA for Eventing Controllers: You can deploy multiple replicas of controllers to avoid a single point of failure.
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventing-controller
+  namespace: knative-eventing
+spec:
+  replicas: 3  # Ensures high availability with 3 replicas
+----
+
+* Durable Event Delivery
+
+** Broker and Channel Configuration: For reliable message delivery, configure durable channels and brokers using persistent storage (e.g., Kafka, RabbitMQ).
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: messaging.knative.dev/v1
+kind: KafkaChannel
+metadata:
+  name: my-kafka-channel
+  namespace: default
+spec:
+  numPartitions: 3
+  replicationFactor: 3
+  retentionDuration: "168h"  # Keep messages for one week
+----
+
+== Networking Configuration
+
+Knative uses various networking layers (Istio, Contour, Kourier) for routing and ingress management. In production, you need to tune networking for security and performance.
+
+* Enable HTTPS for Secure Traffic
+
+** Configure TLS: Use a TLS provider like Cert-Manager to handle certificates and enable HTTPS traffic.
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-service-ingress
+  namespace: default
+spec:
+  tls:
+  - hosts:
+    - myapp.example.com
+    secretName: myapp-tls
+----
+
+* Custom Domain Configuration
+
+** Use Custom Domain:
+In production, you typically use custom domains instead of the default auto-generated ones.
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-domain
+  namespace: knative-serving
+data:
+  example.com: ""
+----
+
+* Network Policy for Pod Security
+
+** Configure Network Policy: Apply network policies to control traffic between pods to enhance security.
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all
+  namespace: knative-serving
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress: []
+  egress: []
+----
+
+== Observability & Monitoring
+
+To monitor your Knative setup in production, integrate observability tools like Prometheus, Grafana, or others.
+
+* Enable Monitoring Metrics
+
+** Prometheus Integration (config-observability.yaml): Enable metrics for Knative services and autoscalers to monitor performance.
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-observability
+  namespace: knative-serving
+data:
+  request-metrics-backend-destination: prometheus  # Send metrics to Prometheus
+  enable-request-log: "true"
+----
+
+* Logging Configuration
+
+** Fluentd for Centralized Logs: Configure Fluentd or another logging tool to aggregate logs from all Knative services.
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-logging
+  namespace: knative-serving
+data:
+  logging.enable-json-log: "true"  # Enable structured logging
+----
+
+==  Security and Authentication
+
+To ensure security in production, you can use mutual TLS (mTLS) and authentication.
+
+* Enable Mutual TLS (mTLS)
+
+** Istio mTLS for Secure Communication:
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: knative-serving
+spec:
+  mtls:
+    mode: STRICT
+----
+
+* Service Account for Permissions
+
+** Assign Service Accounts for better control over access permissions:
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: knative-user
+  namespace: knative-serving
+----
+
+== Scaling and Performance
+
+* Scale Control: Configure horizontal pod autoscalers (HPA) based on CPU and memory usage for better scaling under load.
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: activator
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+----
+
+== Summary
+
+* *Autoscaling:* Adjust parameters like concurrency, scale-up rate, and request timeouts.
+* *Eventing:* Enable HA, reliable messaging via Kafka, and delivery retries.
+* *Networking:* Secure communication with TLS, and control ingress/egress with policies.
+* *Observability:* Use Prometheus and structured logging for visibility into system health.
+* *Security:* Employ mTLS, network policies, and fine-grained permissions.

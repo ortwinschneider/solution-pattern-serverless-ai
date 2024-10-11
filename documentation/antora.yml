@@ -1,5 +1,5 @@
 name: solution-pattern-template
-title: Template Tutorial
+title: Openshift Serverless for AI/ML
 version: master
 nav:
   - modules/ROOT/nav.adoc

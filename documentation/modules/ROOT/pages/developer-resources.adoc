@@ -6,6 +6,61 @@
 
 = Developer Resources
 
+image::ai-platform.png[width=50%]
+
+== Resources
+
 * Add link to the git repo of the code
 * Add links to whitepapers, ebooks, learning paths, product pages
 
+[#interactive-demos]
+== Interactive Demos
+
+=== Installing OpenShift AI
+++++
+<!--ARCADE EMBED START--><div style="position: relative; padding-bottom: calc(50.31250000000001% + 41px); height: 0; width: 100%;"><iframe src="https://demo.arcade.software/R1qFrfeSrN68LvhJHCqX?embed&embed_mobile=tab&embed_desktop=inline&show_copy_link=true" title="Red Hat OpenShift AI installation and setup" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="clipboard-write" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; color-scheme: light;" ></iframe></div><!--ARCADE EMBED END-->
+++++
+
+=== Model Training with OpenShift AI
+++++
+<!--ARCADE EMBED START--><div style="position: relative; padding-bottom: calc(50.31250000000001% + 41px); height: 0; width: 100%;"><iframe src="https://demo.arcade.software/BtjRlkBKTKiGy4llE6ND?embed&embed_mobile=tab&embed_desktop=inline&show_copy_link=true" title="Model training in Red Hat OpenShift AI" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="clipboard-write" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; color-scheme: light;" ></iframe></div><!--ARCADE EMBED END-->
+++++
+
+[#demos]
+== OpenShift Serverless - Demo Recordings
+
+Here you'll find a list with additional OpenShift Serverless demo content.
+
+=== Knative Serving
+
+Knative Serving is the component responsible for:
+
+- Deploying applications
+- Updating applications
+- Routing traffic to applications
+- Auto scaling applications
+
+video::oKIHoDzw1RI[youtube, width=800, height=480]
+
+=== Knative Eventing
+
+Knative Eventing is a component of Red Hat OpenShift Serverless, which provides features for implementing event-driven architectures in a serverless way. Knative Eventing has tools for routing events from services that publish events, to services that consume those events.
+
+video::fztahFNPpcI[youtube, width=800, height=480]
+
+=== Knative Functions
+
+In the context of Serverless, a function is a very specific, simple unit of code, which takes an input, executes business logic, and returns an output. As a developer, you focus on implementing the function, and offload all the other details to the underlying infrastructure.
+
+Additionally, OpenShift Serverless Functions act as Knative services when deployed to Red Hat OpenShift Container Platform (RHOCP), so you can connect functions to Knative Eventing components. By integrating serverless functions and Knative Eventing, you can construct event-driven serverless architectures, while reducing the effort required to produce, consume, deliver, and route events.
+
+You can consider Functions as a Development model and Knative as the Deployment model.
+
+video::lNeieapAhnc[youtube, width=800, height=480]
+
+=== Processing IoT data and serving AI/ML models with OpenShift Serverless
+
+This demo gives you an overview of all the capabilities of Red Hat OpenShift Serverless in a real world context. We'll briefly explore Knative Serving, Eventing and Functions, and walk you through an example use case, where we collect telemetry data from simulated vehicles, process this data with OpenShift Serverless in various ways and also use the data to train a machine learning model with OpenShift AI, Red Hat's MLOps platform. 
+The model will then be deployed as a Knative Service and provides the inference endpoint for our business application.
+
+video::J0RB4umzJ-g[youtube, width=800, height=480]

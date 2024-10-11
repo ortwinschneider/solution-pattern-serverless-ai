@@ -3,102 +3,106 @@
 :sectlinks:
 :doctype: book
 
-= Architecture 
+= OpenShift Serverless Architecture 
 
-Introduction for the architecture of this solution pattern.
-
-== Common Challenges 
-
-[#tech_stack]
-== Technology Stack
-
-// Change links and text here as you see fit.
-* Red Hat supported products
-** https://www.redhat.com/en/technologies/cloud-computing/openshift[Red Hat OpenShift]
-** Red Hat Application Foundation
-*** https://access.redhat.com/products/quarkus[Quarkus]
-*** https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-streams-for-apache-kafka[Kafka Streams]
-* Other open source products:
-** https://www.postgresql.org/[PostgreSQL database]
-** https://helm.sh/[Helm]
+This document describes the fundamental concepts behind OpenShift Serverless (OSS) and Knative with architectural diagrams. In the following sections, when referring to “Knative,” we imply OpenShift Serverless, too. Except when explicitly discussing OSS, these concepts are unique to OSS and cannot be found in Knative.
 
 
-[#in_depth]
-== An in-depth look at the solution's architecture
+Diagrams & Concepts:
 
-Technical description including all or some of the following: architecture ir ed diagrams. In-depth details of the decisions made and solutions used. Description of each service and what it is used for. Description of any integration.
+* The Components diagram gives a high-level overview of Knative control plane components. 
+* The Sources diagram focuses on the Adapter layer that imports external events, converts them to CloudEvents, and passes them on to sinks.
+* The Activator diagram shows the data flow for the two situations when no active application pod is running to service a request and when there are one or more replicas up to answer an incoming request.
+* The Broker diagram shows the control and data planes of the Broker.
+* The Autoscaling diagrams explain the various autoscaling parameters and how the number of active replicas is correlated to the rate of incoming requests over time.
+* The Function diagram illustrates how OSS Functions combine the build of a container image.
 
-=== Using images 
+The following diagram illustrates a sample that imports messages from a Kafka topic, wrap them into CloudEvents, and propagates them to a Knative Service via a Broker. The individual parts (Knative Eventing sources, brokers and channels, and Knative Serving’s request handling) are explained in detail in different sections of this document. 
 
-image::red_hat_open-hybrid-cloud.png[width=30%]
+image::architecture/kafka-read.png[width=100%]
 
-{empty}
+== Serverless Components
 
-=== Embedding HTML
+These diagrams show the components installed in a typical OpenShift Serverless setup. The components are differentiated between control plane and data plane. You also see how the components are distributed over the fix-named namespaces “knative-serving”, “knative-eventing”, and “openshift-operators”. The diagrams are extracted from this sheet to summarise the various low-level components of a Knative installation.
 
-++++
-  <br>
-  <h3> Embed HTML by surrounding it with with four +s before and after. </h3>
-  <span>View the ascii doc to learn more</span>
-  <br> 
-++++
+image::architecture/knative-serving.png[width=100%]
 
+image::architecture/knative-eventing.png[width=100%]
 
-=== Different decorators
+image::architecture/knative-operators.png[width=100%]
 
-[TIP]
-====
-This is a Tip
-====
+== Serverless Operator 
 
-[NOTE]
-====
-This is a NOTE
-====
+image here
 
-[WARNING]
-====
-This is a WARNING
-====
+== Knative Serving
 
-[IMPORTANT]
-====
-This is IMPORTANT
-====
+These diagrams visualize the flow of the various Serving components across namespace boundaries. The concepts of “Activator” or “Autoscaler” are explained below in more detail.
 
+=== Custom Resources
 
-=== Creating  tables
- 
-[cols="1a,1a,1a"]
-|===
-| *Column A*  | Column *A* | _Column C_
-|
-* Lorem Ipsum
-* Lorem Ipsum
+The purpose and the relationship between the various Knative Serving components are visualized in the following diagram. In almost all use cases, the user only bothers with a Knative Service, and the other resources are created in turn. E.g., when you change the configuration part of a service, a new Revision CR is made. Likewise, if you change the traffic split piece, a new Route might be created. 
 
-|
-* Lorem Ipsum
-* Lorem Ipsum
+image::architecture/serving-overview.png[width=100%]
 
-|
-* Lorem Ipsum
-* Lorem Ipsum
-|===
+=== Revision Routing
 
+The diagrams below show how an incoming request (regardless of its origin - from outside or from within the cluster) is handled for a specific Knative revision. The “Public” and “Private” Services mentioned in the diagrams are referring to Kubernetes Services that are created on behalf of a ServerlessService (SKS) CR that in turn is created for each Revision. The SKS can be either in a mode “Proxy” where all traffic is routed through the Activator in the case of scaling up from 0 but also for buffering requests in case there is not enough headroom by the scaled pods to deal with a burst of traffic. This is configured by the traffic burst capacity (TBC). If there is enough burst capacity available, the Activator goes out of the data path and the SKS is in mode “Serve”. Both modes along with their data flow for an incoming request are visualized below.
 
+image::architecture/rev-routing-proxy.png[width=100%]
 
-=== Content that can be copied
+image::architecture/rev-routing-serve.png[width=100%]
 
-Click below to copy the content
-[.console-input]
-[source,shell script]
-----
-oc version #openshift cli client
-oc login --token=<token> --server=<server>
-----
+=== Activator
 
+The activator is part of the Knative data plane and can be in two modes as illustrated below. For more details about these two modes (activator in and out of the request data path, please refer to the Knative documentation.
 
-[#more_tech]
-== About the Technology Stack
+image::architecture/activator-sequence.png[width=100%]
 
-If you want to include more details about the tech stack you used, this is the place.
+This sequence diagram explains how Knative’s activator component is intercepting the data path of an incoming HTTP request to implement the scale-to-zero functionality. The Activator is explained in detail in the Knative documentation.
+
+image::architecture/activator-overview.png[width=100%]
+
+=== Autoscaler
+
+The autoscaler is at the heart of Knative and offers sophisticated ways to adjust the number of applications replicas to the traffic distribution over time. An important concept here is the idea of concurrent requests (or concurrency for short), which is used favoring requests per second (RPS) in the standard setup. While the detailed algorithm of how concurrency is calculated is quite complex and beyond the scope of this document, in short: Concurrency describes the number of requests that are processed at a point in time. The benefit of this metric is that it also considers the number of processed requests and their duration, which might vary from request to request. Hence, the following diagrams are based on concurrency, but you can also configure to use RPS instead of concurrency.
+
+The autoscaling state can be in one of two modes:
+
+* *Stable Mode* is the initial mode that is used for a traffic distribution that is relatively smooth and doesn’t have hefty spikes.
+* *Panic Mode* is entered if a spike of requests is detected, i.e., the increase of concurrency is more significant than a configurable threshold.
+
+==== Stable Mode
+The stable mode is the normal autoscaling mode when the traffic shape is not changing very quickly. It is a good compromise of service delivery but adds a bit of latency in the scaling decisions to avoid nervous up- and down-scaling. 
+
+image::architecture/autoscaler-stable.png[width=100%]
+
+==== Panic Mode
+The panic mode is entered if the actual concurrency is higher than a threshold based on the averaged concurrency. By default, the panic mode is entered when the real concurrency is more than twice as high as the averaged concurrency. The autoscaler leaves panic mode when the actual concurrency drops below this relative threshold again.
+
+The only thing that changes in the panic mode is the length of the autoscaling windows used to calculate the average concurrency. It’s much shorter and configured as a fraction of the stable mode’s autoscaling window (default: ….). The effect of this shorter time window is that the averaged concurrency curve is much closer to the actual concurrency curve, leading to more immediate scaling decisions.
+
+== Knative Eventing
+
+=== Knative Sources
+The sources diagram illustrates how source adapters import external events, convert them to CloudEvents, and sends them to a “sink”. 
+
+=== Connecting Sources to Services
+There are three ways to connect a source with a Knative service that differs in complexity and sophistication. These concepts do not only apply to Knative Services but generally apply to any “Sink” whose custom resource representation conforms to a certain subschema (i.e., having an url: field in its status: section which is called an “Addressable” in Knative)
+
+*Direct Connection*
+
+image::architecture/source-sink.png[width=100%]
+
+*Channel & Subscriptions*
+
+image::architecture/channel-subs.png[width=100%]
+
+*Broker & Trigger*
+
+image::architecture/broker.png[width=100%]
+
+=== Bindings
+Binding is a concept in Knative that is illustrated in this diagram. A Binding is a special kind of source. However, its task is not to import and convert a CloudEvent directly from a source but connect an existing application component with a “sink”.
+
+== Knative Eventing Kafka

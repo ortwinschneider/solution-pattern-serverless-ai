@@ -5,3 +5,68 @@ A description of the story that was used to build the demo and architectures of 
 == The Solution
 
 This is a summary of the solution
+
+
+=== Embedding HTML
+
+++++
+  <br>
+  <h3> Embed HTML by surrounding it with with four +s before and after. </h3>
+  <span>View the ascii doc to learn more</span>
+  <br> 
+++++
+
+
+=== Different decorators
+
+[TIP]
+====
+This is a Tip
+====
+
+[NOTE]
+====
+This is a NOTE
+====
+
+[WARNING]
+====
+This is a WARNING
+====
+
+[IMPORTANT]
+====
+This is IMPORTANT
+====
+
+
+=== Creating  tables
+ 
+[cols="1a,1a,1a"]
+|===
+| *Column A*  | Column *A* | _Column C_
+|
+* Lorem Ipsum
+* Lorem Ipsum
+
+|
+* Lorem Ipsum
+* Lorem Ipsum
+
+|
+* Lorem Ipsum
+* Lorem Ipsum
+|===
+
+
+
+=== Content that can be copied
+
+Click below to copy the content
+[.console-input]
+[source,shell script]
+----
+oc version #openshift cli client
+oc login --token=<token> --server=<server>
+----
+
